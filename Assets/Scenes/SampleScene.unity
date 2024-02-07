@@ -929,7 +929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guess: {fileID: 1785754343}
   textbox: {fileID: 1044517331}
-  defaultAttempts: 5
+  defaultAttempts: 3
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,29 +30,25 @@ public class GuessNum : MonoBehaviour
     [ContextMenu("Guess Input")]
     public void OnGuess()
     {
-        if (guess == null || int.Parse(guess.text) > 10 || int.Parse(guess.text) <= 0)
+        if (attempts > 0)
         {
-            textbox.text = "Enter a valid guess. >:c";
-        }
-        else if (int.Parse(guess.text) == rand10)
-        {
-            textbox.text = "YOU WON!!!";
-        }
-        else if (attempts > 2)
-        {
+            EventSystem.current.SetSelectedGameObject(guess.gameObject);
+            if (guess == null || int.Parse(guess.text) > 10 || int.Parse(guess.text) <= 0)
+            {
+                textbox.text = "Enter a valid guess. >:c";
+                return;
+            }
             attempts--;
-            textbox.text = "Incorrect! You have " + attempts + " guesses remaining...";
+            Debug.Log("remaining attempts: " + attempts);
+            if (int.Parse(guess.text) == rand10)
+                textbox.text = "YOU WON!!!";
+            else if (attempts > 1)
+                textbox.text = "Incorrect! You have " + attempts + " guesses remaining...";
+            else if (attempts > 0)
+                textbox.text = "Incorrect! You have " + attempts + " guess remaining...";
+            else
+                textbox.text = "YOU LOSE!!!";
         }
-        else if (attempts > 1)
-        {
-            attempts--;
-            textbox.text = "Incorrect! You have " + attempts + " guess remaining...";
-        }
-        else
-        {
-            textbox.text = "YOU LOSE!!!";
-        }
-        EventSystem.current.SetSelectedGameObject(guess.gameObject);
     }
     public void OnReset()
     {
